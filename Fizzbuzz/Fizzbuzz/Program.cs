@@ -14,12 +14,15 @@ namespace Fizzbuzz
 	{
 		public static void Main(string[] args)
 		{
-			var fizzBuzzer = new FizzBuzzer();
+			var fizzBuzzResolver = new FizzBuzzResolver();
 
-			Console.Write("Please Enter Number between 1-100:");
-			string selection = Console.ReadLine();
-			int number = Convert.ToInt32(selection);
-			fizzBuzzer.Resolve(number);
+			//Console.Write("Please Enter Number between 1-100:");
+			//string selection = Console.ReadLine();
+			//int number = Convert.ToInt32(selection)
+			
+			for(int number = 1; number <=100; number++){
+			fizzBuzzResolver.Resolve(number);
+			}
 			
 			Console.Write("Press any key to continue . . . ");
 			

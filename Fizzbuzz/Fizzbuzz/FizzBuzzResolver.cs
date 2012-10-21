@@ -10,38 +10,26 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-
 namespace Fizzbuzz
 {
-	public class FizzBuzzResolverStub 
-	{
-		public string Resolve(int number)
-		{
-			return "1";
-		}
-	}
-	public class PrinterStub : IPrinter
-	{
-		public void Print(string value){
-			PrintWasCalled = true;
-		}
-		
-		public bool PrintWasCalled{get; private set;}
-			
-	}
-
-	public class FizzBuzzer
+	
+    public class FizzBuzzResolver
 	{
 		private IPrinter _printer;
 		
-		public FizzBuzzer():this(new ConsolePrinter())
+		public FizzBuzzResolver():this(new ConsolePrinter())
 		{
 			
 		}
 		
-		public FizzBuzzer(IPrinter printer)
+		public FizzBuzzResolver(IPrinter printer)
 		{
 			_printer = printer;
+		}
+		
+		public string Run()
+		{
+    		return "1";
 		}
 		
 		public string Resolve(int value)
@@ -49,48 +37,22 @@ namespace Fizzbuzz
 			
 			if(value%3 == 0 && value%5 == 0){
 				Console.WriteLine("FizzBuzz");
-				return null;
+				return "Fizzbuzz";
 			}
 			if(value%3 == 0){
 				Console.WriteLine("Fizz");
-				return null;
+				return "Fizz";
 			}
 			if(value%5 == 0){
 				Console.WriteLine("Buzz");
-				return null;
+				return "Buzz";
 			}
 			Console.WriteLine(value);
 			return value.ToString();
 			
 		}
 		
-	}
-	
-	/*public class FizzBuzzResolver : IFizzBuzzResolver
-	{
-		
-		public FizzBuzzResolver()
-		{
-			
-		}
-		
-    	public string Resolve(int value)
-		{
-			if(value%3 == 0 && value %5 == 0){
-		    return "FizzBuzz";
-			}
-			if(value%3 == 0){
-			return "Fizz";
-			}
-			if(value%5 == 0){
-			return "Buzz";
-			}
-			
-
-			return value.ToString();
-			
-		}
-	
+    }
 		[TestFixture]
 		public class FizzBuzzResolverTest
 		{
@@ -115,9 +77,9 @@ namespace Fizzbuzz
 			{
 				var sut = new FizzBuzzResolver();
 				var result = sut.Resolve(15);
-				Assert.AreEqual("FizzBuzz", result);
+				Assert.AreEqual(result, "FizzBuzz");
 			}
-			
+		
 			[Test]
 			public void NumbersNotDivisibleBy3Or5()
 			{
@@ -127,22 +89,4 @@ namespace Fizzbuzz
 				Assert.AreEqual(number.ToString(), result);
 			}
 		}	
-		
-		[TestFixture]
-		public class FizzBuzzerTests
-		{
-			[Test]
-			public void PrintTest()
-			{
-				var printer = new PrinterStub();
-				var fizzBuzzResolver = new FizzBuzzResolverStub();
-				var sut = new FizzBuzzer(printer);
-				
-				sut.Run();
-				
-				Assert.IsTrue(printer.PrintWasCalled);
-			}
-		}
-	}
-	*/
 }
